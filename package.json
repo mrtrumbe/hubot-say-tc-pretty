@@ -11,6 +11,7 @@
     "hubot",
     "say-it-pretty",
     "say-tc-pretty",
+    "teamcity",
     "listener"
   ],
   "author": "Matthew Trumbell <https://github.com/mrtrumbe>",

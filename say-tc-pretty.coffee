@@ -26,6 +26,13 @@
 # Notes:
 #   The following properties from the json payload are used:
 #   
+#   buildNumber - Which build number is this? Optional.
+#   buildResult - Looking for 'success'. Anything else is considered a failure. Required.
+#   buildResultPrevious - Same as buildResult, but for the last build. Optional.
+#   buildStatus - Any last words from the build server on how the build went down. Optional.
+#   
+#
+#
 # Author:
 #   mrtrumbe
 
