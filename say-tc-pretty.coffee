@@ -24,7 +24,7 @@
 #   None
 #
 # Notes:
-#   The following properties from the json payload are used:
+#   The payload must contain a property build, which should be an object with properties:
 #   
 #   agentName - The name of the agent that did the built. Optional.
 #   buildName - Which project build configuration is being built. Required.
@@ -50,7 +50,7 @@ module.exports = (robot)->
     
     #robot.emit "sayitpretty", req.body, success, error
     console.log req.body
-    for prop in req.body.teamcityProperties
+    for prop in req.body.build.teamcityProperties
         consol.log prop
 
     res.end "done."
