@@ -51,6 +51,6 @@ module.exports = (robot)->
     #robot.emit "sayitpretty", req.body, success, error
     console.log req.body
     for prop in req.body.build.teamcityProperties
-        consol.log prop
+        console.log prop
 
     res.end "done."
