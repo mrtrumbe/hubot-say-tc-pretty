@@ -1,0 +1,24 @@
+{
+  "name": "hubot-say-tc-pretty",
+  "version": "1.0.0",
+  "description": "Listens to webhook calls from TeamCity.",
+  "main": "say-tc-pretty.coffee",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mrtrumbe/hubot-say-tc-pretty.git"
+  },
+  "keywords": [
+    "hubot",
+    "say-it-pretty",
+    "say-tc-pretty",
+    "listener"
+  ],
+  "author": "Matthew Trumbell <https://github.com/mrtrumbe>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrtrumbe/hubot-say-tc-pretty/issues"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6"
+  }
+}
