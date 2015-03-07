@@ -1,7 +1,7 @@
 {
   "name": "hubot-say-tc-pretty",
   "version": "1.0.0",
-  "description": "Listens to webhook calls from TeamCity.",
+  "description": "Listen to webhook calls from TeamCity and say them to a chat group using hubot-say-it-pretty.",
   "main": "say-tc-pretty.coffee",
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     "url": "https://github.com/mrtrumbe/hubot-say-tc-pretty/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6"
+    "coffee-script": "~1.6",
+    "say-it-pretty": "1.0.0"
   }
 }
