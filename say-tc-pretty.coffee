@@ -82,10 +82,10 @@ module.exports = (robot)->
 
     head = ''
     if build.agentName
-      message = message + 'Built on agent ' + build.agentName.trim() + '.'
+      head = head + 'Built on agent ' + build.agentName.trim() + '. '
 
     if build.triggeredBy
-      message = message + 'Triggered by ' + build.triggeredBy.trim() + '.'
+      head = head + 'Triggered by ' + build.triggeredBy.trim() + '.'
 
     if head == ''
       head = undefined
