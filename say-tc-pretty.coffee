@@ -107,7 +107,8 @@ module.exports = (robot)->
         room: room,
         title: title,
         head: head,
-        message: message
+        message: message,
+        indent: true
       }
     
       robot.emit "sayitpretty", command, success, error
