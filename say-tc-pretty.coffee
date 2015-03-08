@@ -41,16 +41,71 @@
 TextMessage = require('hubot').TextMessage
 
 module.exports = (robot)->
+  rooms = process.env.HUBOT_SAY_TC_PRETTY_ROOMS
+  if rooms
+    rooms = rooms.trim().split(',')
+    if rooms.length == 0
+      rooms = null
+      robot.logger.error "say-tc-pretty needs a room configured in the HUBOT_SAY_TC_PRETTY_ROOMS env variable."
+      return
+  else
+    robot.logger.error "say-tc-pretty needs a room configured in the HUBOT_SAY_TC_PRETTY_ROOMS env variable."
+    return
+
+
   robot.router.post "/hubot/build/", (req, res)->
     success = (msg) ->
       res.end msg
 
     error = (msg, err) ->
       res.end msg
-    
-    #robot.emit "sayitpretty", req.body, success, error
-    console.log req.body
-    for prop in req.body.build.teamcityProperties
-        console.log prop
 
-    res.end "done."
+    build = req.body.build
+    unless build
+      res.end "json payload doesn't have a build property. cannot. go. on."
+      return
+
+    if not build.buildName or not build.buildResult or not build.projectName
+      res.end "build object doesn't have buildName, buildResult, or projectName. cannot. go. on."
+      return
+    
+    title = null
+    if build.buildResult.trim() != 'success'
+      title = 'Build Failure!'
+      success = false
+    else
+      success = true
+      if not build.buildResultPrevious || build.buildResultPrevious.trim() == 'success'
+        title = 'Build Succeeded!'
+      else
+        title = 'Success! Build Fixed.'
+
+    if build.buildNumber
+      head = 'Build #' + build.buildNumber.trim() + ' of '
+    else
+      head = 'Built'
+
+    head = build.projectName.trim() + '(' + build.buildName.trim() + ').'
+
+    message = ''
+    if build.agentName
+      message = message + 'Built on agent ' + build.agentName.trim() + '.'
+
+    if build.triggeredBy
+      message = message + 'Triggered by ' + build.triggeredBy.trim() + '.'
+
+    if not success and build.buildStatus
+      message = 'Status: ' + build.buildStatus.trim()
+
+    if message == ''
+      message = undefined
+    
+    for room in rooms
+      command = {
+        room: room,
+        title: title,
+        head: head,
+        message: message
+      }
+    
+      robot.emit "sayitpretty", command, success, error
