@@ -73,12 +73,12 @@ module.exports = (robot)->
     
     title = null
     if build.buildResult.trim() != 'success'
-      title = 'Build of ' + bn ' Failed!'
+      title = 'Build of ' + bn + ' Failed!'
       buildSuccess = false
     else
       buildSuccess = true
       if not build.buildResultPrevious || build.buildResultPrevious.trim() == 'success'
-        title = 'Build of ' + bn ' Succeeded!'
+        title = 'Build of ' + bn + ' Succeeded!'
       else
         title = 'Success! Build of ' + bn + ' Fixed.'
 
