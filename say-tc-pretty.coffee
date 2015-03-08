@@ -85,7 +85,7 @@ module.exports = (robot)->
     else
       head = 'Built'
 
-    head = build.projectName.trim() + '(' + build.buildName.trim() + ').'
+    head = head + build.projectName.trim() + '(' + build.buildName.trim() + ').'
 
     message = ''
     if build.agentName
