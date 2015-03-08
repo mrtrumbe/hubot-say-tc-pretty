@@ -73,25 +73,25 @@ module.exports = (robot)->
     
     title = null
     if build.buildResult.trim() != 'success'
-      title = 'Build of ' + bn + ' Failed!'
+      title = 'Build ' + bn + ' Failed!'
       buildSuccess = false
     else
       buildSuccess = true
       if not build.buildResultPrevious || build.buildResultPrevious.trim() == 'success'
-        title = 'Build of ' + bn + ' Succeeded!'
+        title = 'Build ' + bn + ' Succeeded!'
       else
-        title = 'Success! Build of ' + bn + ' Fixed.'
+        title = 'Build ' + bn + ' Fixed!'
 
     if build.buildNumber
-      head = 'Build #' + build.buildNumber.trim()
+      head = '#' + build.buildNumber.trim()
     else
       head = 'Built'
 
     if build.agentName
-      head = head + ' on agent ' + build.agentName.trim()
+      head = head + ' on ' + build.agentName.trim()
 
     if build.triggeredBy
-      head = head + ' triggered by ' + build.triggeredBy.trim()
+      head = head + ' by ' + build.triggeredBy.trim()
 
     if head == ''
       head = undefined
