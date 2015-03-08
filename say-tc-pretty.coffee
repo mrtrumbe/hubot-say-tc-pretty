@@ -100,7 +100,7 @@ module.exports = (robot)->
 
     message = undefined
     if not buildSuccess and build.buildStatus
-      message = 'Status: ' + build.buildStatus.trim()
+      message = build.buildStatus.trim()
     
     for room in rooms
       command = {
