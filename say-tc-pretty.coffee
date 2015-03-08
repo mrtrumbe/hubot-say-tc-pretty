@@ -68,35 +68,37 @@ module.exports = (robot)->
     if not build.buildName or not build.buildResult or not build.projectName
       res.end "build object doesn't have buildName, buildResult, or projectName. cannot. go. on."
       return
+
+    bn = build.projectName.trim() + '(' + build.buildName.trim() + ')'
     
     title = null
     if build.buildResult.trim() != 'success'
-      title = 'Build Failure!'
+      title = 'Build of ' + bn ' Failed!'
       buildSuccess = false
     else
       buildSuccess = true
       if not build.buildResultPrevious || build.buildResultPrevious.trim() == 'success'
-        title = 'Build Succeeded!'
+        title = 'Build of ' + bn ' Succeeded!'
       else
-        title = 'Success! Build Fixed.'
+        title = 'Success! Build of ' + bn + ' Fixed.'
 
-    head = ''
+    if build.buildNumber
+      head = 'Build #' + build.buildNumber.trim() + ' '
+    else
+      head = 'Built '
+
     if build.agentName
-      head = head + 'Built on agent ' + build.agentName.trim() + '. '
+      head = head + ' on agent ' + build.agentName.trim() + ' '
 
     if build.triggeredBy
-      head = head + 'Triggered by ' + build.triggeredBy.trim() + '.'
+      head = head + ' triggered by ' + build.triggeredBy.trim()
 
     if head == ''
       head = undefined
-
-    if build.buildNumber
-      message = 'Build #' + build.buildNumber.trim() + ' of '
     else
-      message = 'Built '
+      head = head + '.'
 
-    message = message + build.projectName.trim() + '(' + build.buildName.trim() + ').'
-
+    message = undefined
     if not buildSuccess and build.buildStatus
       message = 'Status: ' + build.buildStatus.trim()
     
