@@ -69,7 +69,7 @@ module.exports = (robot)->
       res.end "build object doesn't have buildName, buildResult, or projectName. cannot. go. on."
       return
 
-    bn = build.projectName.trim() + '(' + build.buildName.trim() + ')'
+    bn = build.projectName.trim() + ':' + build.buildName.trim()
     
     title = null
     if build.buildResult.trim() != 'success'
@@ -83,12 +83,12 @@ module.exports = (robot)->
         title = 'Success! Build of ' + bn + ' Fixed.'
 
     if build.buildNumber
-      head = 'Build #' + build.buildNumber.trim() + ' '
+      head = 'Build #' + build.buildNumber.trim()
     else
-      head = 'Built '
+      head = 'Built'
 
     if build.agentName
-      head = head + ' on agent ' + build.agentName.trim() + ' '
+      head = head + ' on agent ' + build.agentName.trim()
 
     if build.triggeredBy
       head = head + ' triggered by ' + build.triggeredBy.trim()
