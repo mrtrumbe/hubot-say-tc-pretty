@@ -72,33 +72,33 @@ module.exports = (robot)->
     title = null
     if build.buildResult.trim() != 'success'
       title = 'Build Failure!'
-      success = false
+      buildSuccess = false
     else
-      success = true
+      buildSuccess = true
       if not build.buildResultPrevious || build.buildResultPrevious.trim() == 'success'
         title = 'Build Succeeded!'
       else
         title = 'Success! Build Fixed.'
 
-    if build.buildNumber
-      head = 'Build #' + build.buildNumber.trim() + ' of '
-    else
-      head = 'Built'
-
-    head = head + build.projectName.trim() + '(' + build.buildName.trim() + ').'
-
-    message = ''
+    head = ''
     if build.agentName
       message = message + 'Built on agent ' + build.agentName.trim() + '.'
 
     if build.triggeredBy
       message = message + 'Triggered by ' + build.triggeredBy.trim() + '.'
 
-    if not success and build.buildStatus
-      message = 'Status: ' + build.buildStatus.trim()
+    if head == ''
+      head = undefined
 
-    if message == ''
-      message = undefined
+    if build.buildNumber
+      message = 'Build #' + build.buildNumber.trim() + ' of '
+    else
+      message = 'Built '
+
+    message = message + build.projectName.trim() + '(' + build.buildName.trim() + ').'
+
+    if not buildSuccess and build.buildStatus
+      message = 'Status: ' + build.buildStatus.trim()
     
     for room in rooms
       command = {
