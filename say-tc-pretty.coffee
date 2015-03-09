@@ -99,7 +99,7 @@ module.exports = (robot)->
       head = head + '.'
 
     message = undefined
-    if not buildSuccess and build.buildStatus
+    if build.buildStatus
       message = build.buildStatus.trim()
     
     for room in rooms
