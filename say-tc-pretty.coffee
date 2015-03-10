@@ -32,6 +32,7 @@
 #   buildResult - Looking for 'success'. Anything else is considered a failure. Required.
 #   buildResultPrevious - Same as buildResult, but for the last build. Optional.
 #   buildStatus - Any last words from the build server on how the build went down. Optional.
+#   buildStatusUrl - The URL to the TeamCity page for this build. Optional.
 #   projectName - The name of the project being built. Required.
 #   triggeredBy - Who or what triggered the build? Optional.
 #
@@ -101,6 +102,12 @@ module.exports = (robot)->
     message = undefined
     if build.buildStatus
       message = build.buildStatus.trim()
+
+    if build.buildStatusUrl
+      if message
+        message = message + ' ' + build.buildStatusUrl
+      else
+        message = build.buildStatusUrl
     
     for room in rooms
       command = {
