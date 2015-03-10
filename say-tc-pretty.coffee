@@ -105,7 +105,7 @@ module.exports = (robot)->
 
     if build.buildStatusUrl
       if message
-        message = message + ' ' + build.buildStatusUrl
+        message = message + '\n' + build.buildStatusUrl
       else
         message = build.buildStatusUrl
     
